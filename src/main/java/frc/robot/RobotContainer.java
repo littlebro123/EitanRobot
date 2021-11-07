@@ -7,18 +7,24 @@
 
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.button.Button;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.subsystems.drivetrain.Drivetrain;
 import frc.robot.subsystems.drivetrain.commands.GTAdrive;
 import frc.robot.subsystems.intake.commands.IntakeCommand;
+import frc.robot.subsystems.turret.Turret;
+import frc.robot.subsystems.turret.commands.Gunner;
 
-import static frc.robot.Ports.Drivetrain.*;
+import static frc.robot.Ports.RIGHT_JOYSTICK;
+import static frc.robot.Ports.LEFT_JOYSTICK;
+import static frc.robot.Ports.ADDITIONAL_JOYSTICK;
 import static frc.robot.Ports.XBOX;
+import static frc.robot.Ports.Turret.*;
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -33,6 +39,7 @@ public class RobotContainer {
     XboxController xboxController = new XboxController(XBOX);
     JoystickButton a = new JoystickButton(xboxController, XboxController.Button.kA.value);
     JoystickButton x = new JoystickButton(xboxController, XboxController.Button.kX.value);
+    Turret turret = new Turret(new TalonSRX(MOTOR_MAIN), new TalonSRX(MOTOR_AUX));
     // The robot's subsystems and commands are defined here...
 
 
@@ -51,7 +58,10 @@ public class RobotContainer {
      * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
      */
     private void configureButtonBindings() {
-        new GTAdrive(drivetrain, right_joystick, left_joystick);
+        new ParallelCommandGroup(
+                new GTAdrive(drivetrain, right_joystick, left_joystick),
+                new Gunner(turret, xboxController)
+        );
         a.whileHeld(new IntakeCommand(true));
         x.whileHeld(new IntakeCommand(false));
     }
@@ -63,7 +73,6 @@ public class RobotContainer {
      * @return the command to run in autonomous
      */
     public Command getAutonomousCommand() {
-
         // An ExampleCommand will run in autonomous
         return null;
     }
