@@ -1,7 +1,9 @@
 package frc.robot;
 
 public class Ports {
-    public static class Drivetrain{
+    public static final int XBOX = 0;
+
+    public static class Drivetrain {
         public static final int FR_MOTOR = 0;
         public static final int FL_MOTOR = 0;
         public static final int RR_MOTOR = 0;
@@ -19,5 +21,11 @@ public class Ports {
 
         public static final int RIGHT_JOYSTICK = 0;
         public static final int LEFT_JOYSTICK = 0;
+    }
+
+    public static class Intake {
+        public static final int MOTOR_MAIN = 0;
+        public static final boolean INVERTED = false;
+        public static final boolean SENSOR_PHASE = false;
     }
 }

@@ -11,12 +11,14 @@ import static frc.robot.Ports.Drivetrain.*;
 public class GTAdrive extends CommandBase {
     private PIDController pidController = new PIDController(kP, kI, kD);
     private Drivetrain drivetrain;
-    private Joystick right_joystick = new Joystick(RIGHT_JOYSTICK);
-    private Joystick left_joystick = new Joystick(LEFT_JOYSTICK);
+    private Joystick right_joystick;
+    private Joystick left_joystick;
     private double X;
     private double Y;
 
-    public GTAdrive(Drivetrain drivetrain) {
+    public GTAdrive(Drivetrain drivetrain, Joystick right_joystick, Joystick left_joystick) {
+        this.left_joystick = left_joystick;
+        this.right_joystick = right_joystick;
         this.drivetrain = drivetrain;
     }
 
