@@ -16,4 +16,11 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
+    public static class Drivetrain{
+        public static final double TURN_MULTIPLIER = 0.25;
+
+        public static final double kP = 0.2;
+        public static final double kI = 0;
+        public static final double kD = 0.02;
+    }
 }
