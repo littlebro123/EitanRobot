@@ -49,4 +49,18 @@ public class Ports {
         public static final boolean MAIN_INVERTED = false;
         public static final boolean MAIN_SENSOR_PHASE = false;
     }
+
+    public static class Shooter {
+        public static final int MOTOR_MAIN = 0;
+        public static final int MOTOR_AUX1 = 0;
+        public static final int MOTOR_AUX2 = 0;
+
+        public static final boolean MAIN_INVERTED = false;
+        public static final boolean AUX1_INVERTED = false;
+        public static final boolean AUX2_INVERTED = false;
+
+        public static final boolean MAIN_SENSOR_PHASE = false;
+        public static final boolean AUX1_SENSOR_PHASE = false;
+        public static final boolean AUX2_SENSOR_PHASE = false;
+    }
 }

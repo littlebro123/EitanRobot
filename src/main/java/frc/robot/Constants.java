@@ -7,6 +7,12 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpiutil.math.Matrix;
+import edu.wpi.first.wpiutil.math.Nat;
+import edu.wpi.first.wpiutil.math.VecBuilder;
+import edu.wpi.first.wpiutil.math.Vector;
+import edu.wpi.first.wpiutil.math.numbers.N1;
+
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants.  This class should not be used for any other purpose.  All constants should be
@@ -16,6 +22,9 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
+    public static final double LOOP_PERIOD = 0.02;
+    public static final double NOMINAL_VOLTAGE = 12.0;
+
     public static class Drivetrain {
         public static final double TURN_MULTIPLIER = 0.25;
 
@@ -30,5 +39,25 @@ public final class Constants {
         public static final double kD = 0.02;
 
         public static final double TICKS_PER_DEGREE = 4096 / 360.0;
+    }
+
+    public static class Shooter {
+        public static final double Kv = 0;
+        public static final double Ka = 0;
+
+        public static final Vector<N1> MODEL_TOLERANCE_VEC = VecBuilder.fill(
+                0.8
+        );
+        public static final Vector<N1> SENSOR_TOLERANCE_VEC = VecBuilder.fill(
+                0.2
+        );
+        public static final Matrix<N1, N1> MODEL_TOLERANCE_MAT = Matrix.mat(Nat.N1(), Nat.N1()).fill(
+                0.8
+        );
+        public static final Matrix<N1, N1> SENSOR_TOLERANCE_MAT = Matrix.mat(Nat.N1(), Nat.N1()).fill(
+                0.2
+        );
+
+        public static final double ballDensity = 0;
     }
 }
