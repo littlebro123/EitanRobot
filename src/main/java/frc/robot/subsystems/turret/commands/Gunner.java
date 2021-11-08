@@ -30,7 +30,7 @@ public class Gunner extends CommandBase {
 
     @Override
     public void end(boolean interrupted) {
-        super.end(interrupted);
+        turret.terminate();
     }
 
     @Override

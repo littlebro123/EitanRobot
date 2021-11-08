@@ -16,6 +16,9 @@ import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.subsystems.drivetrain.Drivetrain;
 import frc.robot.subsystems.drivetrain.commands.GTAdrive;
+import frc.robot.subsystems.funnel.Funnel;
+import frc.robot.subsystems.funnel.commands.DigestBall;
+import frc.robot.subsystems.funnel.commands.Minimize;
 import frc.robot.subsystems.intake.commands.IntakeCommand;
 import frc.robot.subsystems.turret.Turret;
 import frc.robot.subsystems.turret.commands.Gunner;
@@ -39,7 +42,10 @@ public class RobotContainer {
     XboxController xboxController = new XboxController(XBOX);
     JoystickButton a = new JoystickButton(xboxController, XboxController.Button.kA.value);
     JoystickButton x = new JoystickButton(xboxController, XboxController.Button.kX.value);
+    JoystickButton b = new JoystickButton(xboxController, XboxController.Button.kB.value);
+    JoystickButton y = new JoystickButton(xboxController, XboxController.Button.kY.value);
     Turret turret = new Turret(new TalonSRX(MOTOR_MAIN), new TalonSRX(MOTOR_AUX));
+    Funnel funnel = new Funnel();
     // The robot's subsystems and commands are defined here...
 
 
@@ -64,6 +70,8 @@ public class RobotContainer {
         );
         a.whileHeld(new IntakeCommand(true));
         x.whileHeld(new IntakeCommand(false));
+        b.whileHeld(new DigestBall(funnel));
+        y.whileHeld(new Minimize(funnel));
     }
 
 

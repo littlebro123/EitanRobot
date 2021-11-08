@@ -42,4 +42,11 @@ public class Ports {
         public static final boolean MAIN_SENSOR_PHASE = false;
         public static final boolean AUX_SENSOR_PHASE = false;
     }
+
+    public static class Funnel {
+        public static final int MOTOR_MAIN = 0;
+
+        public static final boolean MAIN_INVERTED = false;
+        public static final boolean MAIN_SENSOR_PHASE = false;
+    }
 }
