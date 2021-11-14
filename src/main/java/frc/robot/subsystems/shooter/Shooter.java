@@ -1,5 +1,6 @@
 package frc.robot.subsystems.shooter;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.controller.LinearQuadraticRegulator;
 import edu.wpi.first.wpilibj.estimator.KalmanFilter;
@@ -8,6 +9,7 @@ import edu.wpi.first.wpilibj.system.LinearSystemLoop;
 import edu.wpi.first.wpiutil.math.Matrix;
 import edu.wpi.first.wpiutil.math.Nat;
 import edu.wpi.first.wpiutil.math.numbers.N1;
+import frc.robot.subsystems.UnitModel;
 
 import static frc.robot.Constants.LOOP_PERIOD;
 import static frc.robot.Constants.NOMINAL_VOLTAGE;
@@ -27,6 +29,7 @@ public class Shooter {
     private Matrix<N1, N1> B;
     private Matrix<N1, N1> C;
     private Matrix<N1, N1> D;
+    private UnitModel unitModel = new UnitModel(TICKS_PER_METER);
 
     public Shooter(double distance) {
         this.distance = distance;
@@ -76,5 +79,22 @@ public class Shooter {
         );
     }
 
+    private double sqr(double a) {
+        return Math.pow(a, 2);
+    }
 
+    public double calcInitialVelocity() {
+        return Math.sqrt(
+                (g * sqr(distance)) /
+                (Math.sin(2*THETA) * distance - 2 * Math.cos(THETA) * TARGET_HEIGHT)
+        );
+    }
+
+    public void setVelocity(double velocity) {
+        motor_main.set(ControlMode.Velocity, velocity);
+    }
+
+    public void terminate() {
+        motor_main.set(ControlMode.PercentOutput, 0);
+    }
 }

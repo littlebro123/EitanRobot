@@ -42,8 +42,13 @@ public final class Constants {
     }
 
     public static class Shooter {
+        public static final double WHEEL_RADIUS = 0;
         public static final double Kv = 0;
         public static final double Ka = 0;
+        public static final double g = 9.80665;
+        public static final double TARGET_HEIGHT = 0;
+        public static final double THETA = Math.PI / 4;
+        public static final double TICKS_PER_METER = 2 * Math.PI * WHEEL_RADIUS / 4096;
 
         public static final Vector<N1> MODEL_TOLERANCE_VEC = VecBuilder.fill(
                 0.8
@@ -57,7 +62,5 @@ public final class Constants {
         public static final Matrix<N1, N1> SENSOR_TOLERANCE_MAT = Matrix.mat(Nat.N1(), Nat.N1()).fill(
                 0.2
         );
-
-        public static final double ballDensity = 0;
     }
 }

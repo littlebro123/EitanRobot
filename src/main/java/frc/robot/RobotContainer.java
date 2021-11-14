@@ -14,12 +14,15 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.subsystems.drivetrain.Drivetrain;
 import frc.robot.subsystems.drivetrain.commands.GTAdrive;
 import frc.robot.subsystems.funnel.Funnel;
 import frc.robot.subsystems.funnel.commands.DigestBall;
 import frc.robot.subsystems.funnel.commands.Minimize;
 import frc.robot.subsystems.intake.commands.IntakeCommand;
+import frc.robot.subsystems.shooter.Shooter;
+import frc.robot.subsystems.shooter.commands.Shoot;
 import frc.robot.subsystems.turret.Turret;
 import frc.robot.subsystems.turret.commands.Gunner;
 
@@ -44,8 +47,10 @@ public class RobotContainer {
     JoystickButton x = new JoystickButton(xboxController, XboxController.Button.kX.value);
     JoystickButton b = new JoystickButton(xboxController, XboxController.Button.kB.value);
     JoystickButton y = new JoystickButton(xboxController, XboxController.Button.kY.value);
+    JoystickButton RT = new JoystickButton(xboxController, XboxController.Button.kBumperRight.value);
     Turret turret = new Turret(new TalonSRX(MOTOR_MAIN), new TalonSRX(MOTOR_AUX));
     Funnel funnel = new Funnel();
+    Shooter shooter = new Shooter(5);
     // The robot's subsystems and commands are defined here...
 
 
@@ -72,6 +77,7 @@ public class RobotContainer {
         x.whileHeld(new IntakeCommand(false));
         b.whileHeld(new DigestBall(funnel));
         y.whileHeld(new Minimize(funnel));
+        RT.whileHeld(new Shoot(shooter));
     }
 
 
